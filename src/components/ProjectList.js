@@ -4,15 +4,18 @@ import Grid from "@material-ui/core/Grid";
 import ProjectCard from "./ProjectCard";
 
 const ProjectList = () => {
-  const data = useStaticQuery(graphql`
+    const data = useStaticQuery(graphql`
     {
       allButterProjects {
-        nodes {
-          id
-          slug
-          name
-          summary
-          featured_image
+        edges {
+          node {
+            id
+            slug
+            project_name
+            project_description
+            detailed_desription
+            thumbnail
+          }
         }
       }
     }

@@ -11,30 +11,61 @@ exports.onPreBootstrap = async () => {
   }
 }
 
-const butter = butterSdk(butterCmsApiKey, butterCmsPreview);
+exports.createPages = async ({ graphql, actions, reporter }) => {
+  const { createPage } = actions
 
-exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }) => {
-  const { createNode } = actions;
+  const projectTemplate = path.resolve("./src/templates/project.js")
 
-  // Fetch the projects from ButterCMS
-  const response = await butter.page.list('project');
+  const result = await graphql(`
+    query {
+      allButterProjects {
+        edges {
+          node {
+            slug
+            featured_image
+          }
+        }
+      }
+    }
+  `)
 
-  // Create a Gatsby node for each project
-  response.data.forEach(project => {
-    const node = {
-      ...project,
-      id: createNodeId(`ButterProject-${project.slug}`),
-      parent: null,
-      children: [],
-      internal: {
-        type: 'ButterProject',
-        contentDigest: createContentDigest(project),
+  if (result.errors) {
+    reporter.panicOnBuild(`Error while running GraphQL query.`)
+    return
+  }
+
+  const projects = result.data.allButterProjects.edges.map(edge => edge.node)
+
+  // create file nodes for project images
+  await Promise.all(
+    projects.map(async project => {
+      const fileNode = await createRemoteFileNode({
+        url: project.featured_image,
+        parentNodeId: null,
+        createNode,
+        createNodeId,
+        cache,
+        store,
+      })
+      
+      if (fileNode) {
+        project.featured_image___NODE = fileNode.id
+      }
+    })
+  )
+
+  // create pages for each project
+  projects.forEach(project => {
+    createPage({
+      path: `/projects/${project.slug}/`,
+      component: projectTemplate,
+      context: {
+        slug: project.slug,
       },
-    };
+    })
+  })
+}
 
-    createNode(node);
-  });
-};
 
 exports.onCreatePage = ({ page, actions }) => {
   const { deletePage, createPage } = actions

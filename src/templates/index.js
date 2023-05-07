@@ -2,12 +2,10 @@ import React from "react"
 import Layout from "../containers/Layout"
 import FeaturesSection from "../components/FeaturesSection"
 import HeroSection from "../components/HeroSection"
-import ProjectList from "../components/ProjectsList"
 import TestimonialsSection from "../components/TestimonialsSection"
 import BlogSection from "../components/BlogSection"
 import TwoColumnWithImageSection from "../components/TwoColumnWithImageSection"
 import SEO from "../components/SEO"
-import { graphql, useStaticQuery } from "gatsby"
 
 const IndexPage = ({ pageContext: { pageData, menuData, blogPosts } }) => {
   const bodyElements = pageData.body

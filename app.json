@@ -15,7 +15,7 @@
     "env": {
         "BUTTER_CMS_API_KEY": {
             "description": "The API token of your ButterCMS account",
-            "value": ""
+            "value": "9a50fb6252ff0804582816d7ac5f83b89a1364eb"
         }
     },
     "scripts": {

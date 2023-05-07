@@ -1,19 +1,17 @@
-import React from "react"
-import { Card, CardContent, Typography } from "@material-ui/core"
+import React from 'react'
+import { Link } from 'gatsby'
 
 const ProjectCard = ({ project }) => {
+  const { title, description, slug } = project
+
   return (
-    <Card>
-      <CardContent>
-        <Typography variant="h5" component="h2">
-          {project.title}
-        </Typography>
-        <Typography color="textSecondary">{project.date}</Typography>
-        <Typography variant="body2" component="p">
-          {project.description}
-        </Typography>
-      </CardContent>
-    </Card>
+    <div className="card">
+      <div className="card-content">
+        <h2 className="card-title">{title}</h2>
+        <p className="card-description">{description}</p>
+        <Link to={`/projects/${slug}`}>Read More</Link>
+      </div>
+    </div>
   )
 }
 

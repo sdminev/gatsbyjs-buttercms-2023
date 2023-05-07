@@ -1,26 +1,48 @@
-import React from "react";
-import { graphql } from "gatsby";
+// project.js
+
+import React from "react"
+import { graphql } from "gatsby"
+import Layout from "../components/Layout"
+import SEO from "../components/seo"
+import Img from "gatsby-image"
 
 const Project = ({ data }) => {
-  const project = data.butter.project;
-
+  const { title, featured_image, project_description } = data.butter.project
   return (
-    <div>
-      <h2>{project.name}</h2>
-      <p>{project.description}</p>
-    </div>
-  );
-};
+    <Layout>
+      <SEO title={title} />
+      <div className="project">
+        <h1 className="project-title">{title}</h1>
+        {featured_image && (
+          <div className="project-image-container">
+            <Img fluid={featured_image} alt={title} />
+          </div>
+        )}
+        <div
+          className="project-description"
+          dangerouslySetInnerHTML={{ __html: project_description }}
+        />
+      </div>
+    </Layout>
+  )
+}
 
-export default Project;
+export default Project
 
 export const query = graphql`
   query($slug: String!) {
     butter {
       project(slug: { eq: $slug }) {
-        name
-        description
+        title
+        project_description
+        featured_image {
+          childImageSharp {
+            fluid(maxWidth: 800) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
       }
     }
   }
-`;
+`

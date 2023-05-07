@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import butter from "../butter-client";
-import ProjectsList from "../components/ProjectList";
+import ProjectsList from "../components/ProjectsList";
 
 const ProjectsPage = () => {
   const [projects, setProjects] = useState([]);

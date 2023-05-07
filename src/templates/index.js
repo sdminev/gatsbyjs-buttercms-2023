@@ -2,7 +2,7 @@ import React from "react"
 import Layout from "../containers/Layout"
 import FeaturesSection from "../components/FeaturesSection"
 import HeroSection from "../components/HeroSection"
-import ProjectList from "../components/ProjectList"
+import ProjectList from "../components/ProjectsList"
 import TestimonialsSection from "../components/TestimonialsSection"
 import BlogSection from "../components/BlogSection"
 import TwoColumnWithImageSection from "../components/TwoColumnWithImageSection"
@@ -18,7 +18,9 @@ const IndexPage = ({ pageContext: { pageData, menuData, blogPosts } }) => {
       <SEO { ...pageData.seo } />
 
       <HeroSection fields={bodyElements[0].fields} />
-      <ProjectList />
+      <div className="projects">
+        <ProjectsList projects={projects} />
+      </div>
       {bodyElements.map((bodyElement, i) => {
         switch (bodyElement.type) {
           case "two_column_with_image":
@@ -37,3 +39,21 @@ const IndexPage = ({ pageContext: { pageData, menuData, blogPosts } }) => {
 }
 
 export default IndexPage
+
+export const query = graphql`
+  {
+    butter {
+      projects {
+        slug
+        title
+        featured_image {
+          childImageSharp {
+            fluid(maxWidth: 800) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
+      }
+    }
+  }
+`

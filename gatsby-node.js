@@ -161,6 +161,20 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `)
 
+  const projectData = await graphql(`
+  query {
+    butterCollection(key: {eq: "project"}) {
+      id
+      value {
+        description
+        image
+        link
+        name
+      }
+    }
+  }
+`)
+
   const allBlogPosts = await blogPageDataQuery()
 
   // index
@@ -170,7 +184,8 @@ exports.createPages = async ({ graphql, actions }) => {
     context: {
       pageData: landingPage.data.butterPage,
       blogPosts: landingPage.data.allButterPost.nodes,
-      menuData: menuItemsData
+      menuData: menuItemsData,
+      projectData
     },
   });
 

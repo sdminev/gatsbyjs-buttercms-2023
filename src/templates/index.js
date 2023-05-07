@@ -8,10 +8,10 @@ import RandomQuote from "../components/random-quote"
 import TwoColumnWithImageSection from "../components/TwoColumnWithImageSection"
 import SEO from "../components/SEO"
 
-const IndexPage = ({ pageContext: { pageData, menuData, blogPosts } }) => {
+const IndexPage = ({ pageContext: { pageData, menuData, projectData, blogPosts } }) => {
   const bodyElements = pageData.body
   const menuItems = menuData.data.butterCollection.value[0].menu_items
-
+console.log('projectData', projectData)
   return (
     <Layout menuItems={menuItems}>
       <SEO { ...pageData.seo } />

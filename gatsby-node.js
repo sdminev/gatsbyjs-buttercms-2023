@@ -295,7 +295,31 @@ exports.createPages = async ({ graphql, actions }) => {
         },
       });
     });
-  };
+  }
+
+  exports.createSchemaCustomization = ({ actions }) => {
+    const { createTypes } = actions;
+  
+    const typeDefs = `
+      type Query {
+        butter: ButterCMS
+      }
+      type ButterCMS {
+        content: ButterCMSContent
+      }
+      type ButterCMSContent {
+        retrieve: [ButterCMSProject]
+      }
+      type ButterCMSProject {
+        slug: String!
+        title: String!
+        description: String!
+        featured_image: String!
+      }
+    `;
+  
+    createTypes(typeDefs);
+  }
   
 
 }

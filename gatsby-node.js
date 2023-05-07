@@ -161,6 +161,26 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `)
 
+  const projectsData = await graphql(`
+  query {
+    butterCollection(key: {eq: "projects"}) {
+      value {
+        data {
+          id
+          slug
+          title
+          description
+          featured_image {
+            alt
+            url
+          }
+        }
+      }
+    }
+  }
+`)
+
+
   const allBlogPosts = await blogPageDataQuery()
 
   // index
@@ -254,18 +274,6 @@ exports.createPages = async ({ graphql, actions }) => {
         categories
       },
     });
-  }) 
-  
-  const projectTemplate = path.resolve(`src/templates/project.js`);
-
-projectQuery.data.allButterProjects.edges.forEach(({ node }) => {
-  createPage({
-    path: `/projects/${node.slug}`,
-    component: projectTemplate,
-    context: {
-      slug: node.slug,
-    },
-  });
-});
+  })
   
 }

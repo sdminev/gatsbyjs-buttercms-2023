@@ -273,4 +273,29 @@ exports.createPages = async ({ graphql, actions }) => {
     createTypes(typeDefs);
   }
 
+  exports.createPages = async ({ actions, graphql }) => {
+    const { createPage } = actions;
+  
+    const result = await graphql(`
+      {
+        butter {
+          projects {
+            slug
+          }
+        }
+      }
+    `);
+  
+    result.data.butter.projects.forEach(({ slug }) => {
+      createPage({
+        path: `/projects/${slug}`,
+        component: require.resolve(`./src/pages/project.js`),
+        context: {
+          slug: slug,
+        },
+      });
+    });
+  };
+  
+
 }

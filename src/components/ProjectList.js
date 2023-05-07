@@ -1,15 +1,14 @@
-import React from "react"
-import ProjectCard from "./ProjectCard"
-import projects from "../data/projects.json" // Import the projects data
+import React from "react";
+import ProjectCard from "./ProjectCard";
 
-const ProjectsList = () => {
+const ProjectsList = ({ projects }) => {
   return (
     <div>
       {projects.map((project) => (
-        <ProjectCard key={project.id} project={project} />
+        <ProjectCard key={project.slug} project={project} />
       ))}
     </div>
-  )
-}
+  );
+};
 
-export default ProjectsList
+export default ProjectsList;

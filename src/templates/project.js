@@ -1,24 +1,26 @@
-import React from "react"
-import Layout from "../components/Layout"
-import projects from "../data/projects.json" // Import the projects data
-import { Typography } from "@material-ui/core"
+import React from "react";
+import { graphql } from "gatsby";
 
-const project = ({ pageContext }) => {
-  const currentProject = projects.find(
-    (project) => project.slug === pageContext.slug
-  )
+const Project = ({ data }) => {
+  const project = data.butter.project;
 
   return (
-    <Layout>
-      <Typography variant="h4" component="h1">
-        {currentProject.title}
-      </Typography>
-      <Typography color="textSecondary">{currentProject.date}</Typography>
-      <Typography variant="body1" component="p">
-        {currentProject.description}
-      </Typography>
-    </Layout>
-  )
-}
+    <div>
+      <h2>{project.name}</h2>
+      <p>{project.description}</p>
+    </div>
+  );
+};
 
-export default project
+export default Project;
+
+export const query = graphql`
+  query($slug: String!) {
+    butter {
+      project(slug: { eq: $slug }) {
+        name
+        description
+      }
+    }
+  }
+`;

@@ -1,23 +1,35 @@
 import React from "react"
-import { Link } from "gatsby"
-import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import { graphql, useStaticQuery } from "gatsby"
+import Grid from "@material-ui/core/Grid"
+import ProjectCard from "./ProjectCard"
 
-const ProjectList = ({ projects }) => {
+const ProjectList = () => {
+  const data = useStaticQuery(graphql`
+    {
+      allButterProjects {
+        edges {
+          node {
+            id
+            slug
+            name
+            summary
+            featured_image
+          }
+        }
+      }
+    }
+  `)
+
+  const projects = data.allButterProjects.edges.map(edge => edge.node)
+
   return (
-    <div className="project-list">
+    <Grid container spacing={3}>
       {projects.map(project => (
-        <div className="project" key={project.id}>
-          <Link to={project.slug}>
-            <GatsbyImage image={getImage(project.thumbnail)} alt={project.title} />
-          </Link>
-          <h2 className="project-title">
-            <Link to={project.slug}>{project.title}</Link>
-          </h2>
-          <p className="project-description">{project.description}</p>
-          <a className="project-link" href={project.link} target="_blank" rel="noreferrer">View Project</a>
-        </div>
+        <Grid item xs={12} md={6} key={project.id}>
+          <ProjectCard project={project} />
+        </Grid>
       ))}
-    </div>
+    </Grid>
   )
 }
 

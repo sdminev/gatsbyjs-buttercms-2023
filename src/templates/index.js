@@ -4,6 +4,7 @@ import FeaturesSection from "../components/FeaturesSection"
 import HeroSection from "../components/HeroSection"
 import TestimonialsSection from "../components/TestimonialsSection"
 import BlogSection from "../components/BlogSection"
+import RandomQuote from "../components/random-quote"
 import TwoColumnWithImageSection from "../components/TwoColumnWithImageSection"
 import SEO from "../components/SEO"
 

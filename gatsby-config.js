@@ -4,7 +4,7 @@ const previewMode = !(process.env.BUTTER_CMS_PREVIEW === "false" || process.env.
 
 module.exports = {
   siteMetadata: {
-    title: `ButterCMS Gatsby.js Starter Project`,
+    title: `SDMinev Gatsby.js Example Project`,
     siteUrl: `https://gatsbyjs-starter-buttercms-vercel.vercel.app/`,
   },
   plugins: [

@@ -11,62 +11,6 @@ exports.onPreBootstrap = async () => {
   }
 }
 
-exports.createPages = async ({ graphql, actions, reporter }) => {
-  const { createPage } = actions
-
-  const projectTemplate = path.resolve("./src/templates/project.js")
-
-  const result = await graphql(`
-    query {
-      allButterProjects {
-        edges {
-          node {
-            slug
-            featured_image
-          }
-        }
-      }
-    }
-  `)
-
-  if (result.errors) {
-    reporter.panicOnBuild(`Error while running GraphQL query.`)
-    return
-  }
-
-  const projects = result.data.allButterProjects.edges.map(edge => edge.node)
-
-  // create file nodes for project images
-  await Promise.all(
-    projects.map(async project => {
-      const fileNode = await createRemoteFileNode({
-        url: project.featured_image,
-        parentNodeId: null,
-        createNode,
-        createNodeId,
-        cache,
-        store,
-      })
-      
-      if (fileNode) {
-        project.featured_image___NODE = fileNode.id
-      }
-    })
-  )
-
-  // create pages for each project
-  projects.forEach(project => {
-    createPage({
-      path: `/projects/${project.slug}/`,
-      component: projectTemplate,
-      context: {
-        slug: project.slug,
-      },
-    })
-  })
-}
-
-
 exports.onCreatePage = ({ page, actions }) => {
   const { deletePage, createPage } = actions
 

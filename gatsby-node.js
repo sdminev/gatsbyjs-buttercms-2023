@@ -254,91 +254,18 @@ exports.createPages = async ({ graphql, actions }) => {
         categories
       },
     });
-  })
+  }) 
+  
+  const projectTemplate = path.resolve(`src/templates/project.js`);
 
-
-
-  exports.createSchemaCustomization = ({ actions }) => {
-    const { createTypes } = actions;
-    const typeDefs = `
-      type ButterProjects implements Node {
-        id: ID!
-        project_name: String!
-        project_description: String!
-        detailed_desription: String!
-        thumbnail: String!
-        slug: String!
-      }
-    `;
-    createTypes(typeDefs);
-  }
-
-  exports.createPages = async ({ actions, graphql }) => {
-    const { createPage } = actions;
+projectQuery.data.allButterProjects.edges.forEach(({ node }) => {
+  createPage({
+    path: `/projects/${node.slug}`,
+    component: projectTemplate,
+    context: {
+      slug: node.slug,
+    },
+  });
+});
   
-    const result = await graphql(`
-      {
-        butter {
-          projects {
-            slug
-          }
-        }
-      }
-    `);
-  
-    result.data.butter.projects.forEach(({ slug }) => {
-      createPage({
-        path: `/projects/${slug}`,
-        component: require.resolve(`./src/pages/project.js`),
-        context: {
-          slug: slug,
-        },
-      });
-    });
-  }
-
-  exports.createSchemaCustomization = ({ actions }) => {
-    const { createTypes } = actions;
-  
-    const typeDefs = `
-      type Query {
-        butter: ButterCMS
-      }
-      type ButterCMS {
-        content: ButterCMSContent
-      }
-      type ButterCMSContent {
-        retrieve: [ButterCMSProject]
-      }
-      type ButterCMSProject {
-        slug: String!
-        title: String!
-        description: String!
-        featured_image: String!
-      }
-    `;
-  
-    createTypes(typeDefs);
-  }
-  
-  exports.createPages = async ({ graphql, actions }) => {
-    const { createPage } = actions;
-  
-    // Fetch the projects data from Butter CMS
-    const { data } = await butterSdk.content.retrieve('projects', {
-      page: 1,
-      page_size: 10,
-    });
-  
-    // Create a page for each project
-    data.forEach((project) => {
-      createPage({
-        path: `/projects/${project.slug}/`,
-        component: path.resolve('./src/templates/project.js'),
-        context: {
-          project,
-        },
-      });
-    });
-  }
 }

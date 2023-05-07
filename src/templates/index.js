@@ -18,9 +18,6 @@ const IndexPage = ({ pageContext: { pageData, menuData, blogPosts } }) => {
       <SEO { ...pageData.seo } />
 
       <HeroSection fields={bodyElements[0].fields} />
-      <div className="projects">
-      <ProjectsList />
-      </div>
       {bodyElements.map((bodyElement, i) => {
         switch (bodyElement.type) {
           case "two_column_with_image":

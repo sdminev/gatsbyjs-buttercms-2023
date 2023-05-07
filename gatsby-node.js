@@ -11,6 +11,32 @@ exports.onPreBootstrap = async () => {
   }
 }
 
+
+
+exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }) => {
+  const butter = butterSdk(butterCmsApiKey, butterCmsPreview);
+  const { createNode } = actions;
+
+  // Fetch the projects from ButterCMS
+  const response = await butter.page.list('project');
+
+  // Create a Gatsby node for each project
+  response.data.forEach(project => {
+    const node = {
+      ...project,
+      id: createNodeId(`ButterProject-${project.slug}`),
+      parent: null,
+      children: [],
+      internal: {
+        type: 'ButterProject',
+        contentDigest: createContentDigest(project),
+      },
+    };
+
+    createNode(node);
+  });
+};
+
 exports.onCreatePage = ({ page, actions }) => {
   const { deletePage, createPage } = actions
 

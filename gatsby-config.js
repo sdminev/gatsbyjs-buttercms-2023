@@ -16,7 +16,7 @@ module.exports = {
         // Collections you want the app to have access to should have their
         // slugs explicitly included in the keys array, as seen below.
         contentFields: {
-          keys: [`navigation_menu`],
+          keys: [`navigation_menu`, `projects`],
           // Optional. Set to 1 to enable test mode for viewing draft content.
           test: previewMode,
         },

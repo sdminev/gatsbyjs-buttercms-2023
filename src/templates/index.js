@@ -17,7 +17,8 @@ const IndexPage = ({ pageContext: { pageData, menuData, blogPosts } }) => {
       <SEO { ...pageData.seo } />
 
       <HeroSection fields={bodyElements[0].fields} />
-      <RandomQuote />
+      <div className="quotes"> <RandomQuote /></div>
+     
       {bodyElements.map((bodyElement, i) => {
         switch (bodyElement.type) {
           case "two_column_with_image":

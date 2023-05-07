@@ -24,7 +24,7 @@ const RandomQuote = () => {
       {quote && (
         <div>
           <h2>{quote.author}</h2>
-          <p>{quote.text}</p>
+          <p>{quote.quote_text}</p>
         </div>
       )}
     </>

@@ -161,6 +161,19 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `)
 
+    // Fetch quotes data
+    const quotesData = await graphql(`
+    query {
+      allButterQuotes {
+        edges {
+          node {
+            slug
+          }
+        }
+      }
+    }
+  `)
+
   const allBlogPosts = await blogPageDataQuery()
 
   // index

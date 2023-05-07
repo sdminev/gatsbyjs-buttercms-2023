@@ -256,4 +256,21 @@ exports.createPages = async ({ graphql, actions }) => {
     });
   })
 
+
+
+  exports.createSchemaCustomization = ({ actions }) => {
+    const { createTypes } = actions;
+    const typeDefs = `
+      type ButterProjects implements Node {
+        id: ID!
+        project_name: String!
+        project_description: String!
+        detailed_desription: String!
+        thumbnail: String!
+        slug: String!
+      }
+    `;
+    createTypes(typeDefs);
+  }
+
 }

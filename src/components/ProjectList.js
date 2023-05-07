@@ -1,37 +1,15 @@
-import React from "react";
-import { graphql, useStaticQuery } from "gatsby";
-import Grid from "@material-ui/core/Grid";
-import ProjectCard from "./ProjectCard";
+import React from "react"
+import ProjectCard from "./ProjectCard"
+import projects from "../data/projects.json" // Import the projects data
 
-const ProjectList = () => {
-    const data = useStaticQuery(graphql`
-    {
-      allButterProjects {
-        edges {
-          node {
-            id
-            slug
-            project_name
-            project_description
-            detailed_desription
-            thumbnail
-          }
-        }
-      }
-    }
-  `);
-
-  const projects = data.allButterProjects.nodes;
-
+const ProjectsList = () => {
   return (
-    <Grid container spacing={3}>
+    <div>
       {projects.map((project) => (
-        <Grid item xs={12} md={6} key={project.id}>
-          <ProjectCard project={project} />
-        </Grid>
+        <ProjectCard key={project.id} project={project} />
       ))}
-    </Grid>
-  );
-};
+    </div>
+  )
+}
 
-export default ProjectList;
+export default ProjectsList

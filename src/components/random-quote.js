@@ -7,7 +7,7 @@ const RandomQuote = () => {
   useEffect(() => {
     axios
       .get(
-        `https://api.buttercms.com/v2/content/?auth_token=${process.env.BUTTER_CMS_API_KEY}&keys=quotes`
+        `https://api.buttercms.com/v2/content/?auth_token=9a50fb6252ff0804582816d7ac5f83b89a1364eb&keys=quotes`
       )
       .then(response => {
         const quotes = response.data.data.quotes

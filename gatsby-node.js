@@ -161,26 +161,6 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `)
 
-  const projectsData = await graphql(`
-  query {
-    butterCollection(key: {eq: "projects"}) {
-      value {
-        data {
-          id
-          slug
-          title
-          description
-          featured_image {
-            alt
-            url
-          }
-        }
-      }
-    }
-  }
-`)
-
-
   const allBlogPosts = await blogPageDataQuery()
 
   // index

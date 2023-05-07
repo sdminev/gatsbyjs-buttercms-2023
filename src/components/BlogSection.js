@@ -3,6 +3,8 @@ import { Link } from "gatsby"
 import BlogPostTile from "./BlogPostTile"
 
 const BlogSection = (props) => {
+  const filteredBlogPosts = props.blogPosts.filter(post => post.category === 'projects');
+
   return (
     <section id="blog" className="blog-section">
       <div className="container">
@@ -23,7 +25,7 @@ const BlogSection = (props) => {
           </div>
         </div>
         <div className="row justify-content-center">
-          {props.blogPosts.map(blogPost => <BlogPostTile key={blogPost.slug} {...blogPost} />)}
+          {filteredBlogPosts.map(blogPost => <BlogPostTile key={blogPost.slug} {...blogPost} />)}
         </div>
       </div>
     </section>

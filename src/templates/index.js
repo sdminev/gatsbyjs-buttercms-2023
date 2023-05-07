@@ -31,7 +31,7 @@ const IndexPage = ({ pageContext: { pageData, menuData, blogPosts } }) => {
             return null
         }
       })}
-      <BlogSection blogPosts={projectPosts} />
+      <BlogSection blogPosts={blogPosts} />
     </Layout>
   )
 }

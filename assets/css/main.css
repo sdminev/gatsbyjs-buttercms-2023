@@ -211,7 +211,7 @@ p {
   color: #CC4137;
 }
 .main-btn.border-btn:hover::after {
-  background-color: rgba(55, 194, 204, 0.15);
+  background-color: rgba(204, 55, 55, 0.15);
 }
 
 .btn-hover {

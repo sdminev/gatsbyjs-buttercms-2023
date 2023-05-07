@@ -11,10 +11,9 @@ exports.onPreBootstrap = async () => {
   }
 }
 
-
+const butter = butterSdk(butterCmsApiKey, butterCmsPreview);
 
 exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }) => {
-  const butter = butterSdk(butterCmsApiKey, butterCmsPreview);
   const { createNode } = actions;
 
   // Fetch the projects from ButterCMS

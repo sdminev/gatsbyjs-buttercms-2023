@@ -321,5 +321,24 @@ exports.createPages = async ({ graphql, actions }) => {
     createTypes(typeDefs);
   }
   
-
+  exports.createPages = async ({ graphql, actions }) => {
+    const { createPage } = actions;
+  
+    // Fetch the projects data from Butter CMS
+    const { data } = await butterSdk.content.retrieve('projects', {
+      page: 1,
+      page_size: 10,
+    });
+  
+    // Create a page for each project
+    data.forEach((project) => {
+      createPage({
+        path: `/projects/${project.slug}/`,
+        component: path.resolve('./src/templates/project.js'),
+        context: {
+          project,
+        },
+      });
+    });
+  }
 }

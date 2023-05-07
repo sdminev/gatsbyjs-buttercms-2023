@@ -1,19 +1,14 @@
-import React from "react"
-import Img from "gatsby-image"
-import { Link } from "gatsby"
+import React from "react";
 
-const ProjectCard = ({ project }) => {
-  const { title, slug, featured_image } = project
+function ProjectCard({ project }) {
   return (
-    <div className="project-card">
-      {featured_image && (
-        <Link to={`/${slug}`}>
-          <Img fluid={featured_image} alt={title} />
-        </Link>
-      )}
-      <h3 className="project-title">{title}</h3>
+    <div>
+      <h2>{project.fields.title}</h2>
+      <p>{project.fields.summary}</p>
+      <img src={project.fields.featured_image} alt={project.fields.title} />
+      <a href={project.fields.url}>View project</a>
     </div>
-  )
+  );
 }
 
-export default ProjectCard
+export default ProjectCard;

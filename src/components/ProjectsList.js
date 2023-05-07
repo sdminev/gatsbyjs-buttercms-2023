@@ -1,14 +1,28 @@
-import React from "react"
-import ProjectCard from "./ProjectCard"
+import React, { useEffect, useState } from "react";
+import butter from "../butter-client";
+import ProjectCard from "./ProjectCard";
 
-const ProjectsList = ({ projects }) => {
+function ProjectsList() {
+  const [projects, setProjects] = useState([]);
+
+  useEffect(() => {
+    butter.content
+      .retrieve("projects")
+      .then((resp) => {
+        setProjects(resp.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
   return (
-    <div className="projects-list">
-      {projects.map(project => (
+    <div>
+      {projects.map((project) => (
         <ProjectCard key={project.slug} project={project} />
       ))}
     </div>
-  )
+  );
 }
 
-export default ProjectsList
+export default ProjectsList;

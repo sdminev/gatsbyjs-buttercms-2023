@@ -19,7 +19,7 @@ const IndexPage = ({ pageContext: { pageData, menuData, blogPosts } }) => {
 
       <HeroSection fields={bodyElements[0].fields} />
       <div className="projects">
-        <ProjectsList projects={projects} />
+      <ProjectsList />
       </div>
       {bodyElements.map((bodyElement, i) => {
         switch (bodyElement.type) {
@@ -39,21 +39,3 @@ const IndexPage = ({ pageContext: { pageData, menuData, blogPosts } }) => {
 }
 
 export default IndexPage
-
-export const query = graphql`
-  {
-    butter {
-      projects {
-        slug
-        title
-        featured_image {
-          childImageSharp {
-            fluid(maxWidth: 800) {
-              ...GatsbyImageSharpFluid
-            }
-          }
-        }
-      }
-    }
-  }
-`

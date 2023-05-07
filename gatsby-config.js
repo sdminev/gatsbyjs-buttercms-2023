@@ -31,6 +31,7 @@ module.exports = {
         levels: 2 // Optional. Defaults to 2. Defines the levels of relationships to serialize
       },
     },
-    `gatsby-plugin-react-helmet`
+    `gatsby-plugin-react-helmet`,`gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`
   ]
 }

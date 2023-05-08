@@ -21,7 +21,7 @@ const IndexPage = ({ pageContext: { pageData, menuData, projectData, blogPosts }
 
       {projects.map(project => {
         return (
-          <div key = "project.name">{ project.name }</div>
+          <div key = {project.name}>{ project.name }</div>
         )
       })}
      

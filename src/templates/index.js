@@ -12,7 +12,7 @@ const IndexPage = ({ pageContext: { pageData, menuData, projectData, blogPosts }
   const bodyElements = pageData.body
   const menuItems = menuData.data.butterCollection.value[0].menu_items
   console.log('projectData', projectData)
-  const projects = projectData.data.butterCollection
+  const projects = projectData?.data?.butterCollection?.value;
   return (
     <Layout menuItems={menuItems}>
       <SEO { ...pageData.seo } />

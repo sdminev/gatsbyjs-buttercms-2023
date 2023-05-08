@@ -11,7 +11,7 @@ import SEO from "../components/SEO"
 const IndexPage = ({ pageContext: { pageData, menuData, projectData, blogPosts } }) => {
   const bodyElements = pageData.body
   const menuItems = menuData.data.butterCollection.value[0].menu_items
-  const projects = projectData.data.butterCollection.value
+  const projects = projectData.data.butterCollection.value; 
   return (
     <Layout menuItems={menuItems}>
       <SEO { ...pageData.seo } />
@@ -21,7 +21,7 @@ const IndexPage = ({ pageContext: { pageData, menuData, projectData, blogPosts }
 
       {projects.map(project => {
         return (
-          <div key = {project.name}>{ project.name }</div>
+          <div key={project.name}>{ project.name }</div>
         )
       })}
      

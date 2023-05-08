@@ -11,16 +11,16 @@ import SEO from "../components/SEO"
 const IndexPage = ({ pageContext: { pageData, menuData, projectData, blogPosts } }) => {
   const bodyElements = pageData.body
   const menuItems = menuData.data.butterCollection.value[0].menu_items
-  console.log('projectData', projectData)
-  const projects = projectData?.data?.butterCollection?.value;
-  console.log(projects)
+console.log('projectData', projectData)
+const projects = projectData.data.butterCollection.value
+console.log(projects)
   return (
     <Layout menuItems={menuItems}>
       <SEO { ...pageData.seo } />
 
       <HeroSection fields={bodyElements[0].fields} />
       <div className="quotes"> <RandomQuote /></div>
-
+     
       {bodyElements.map((bodyElement, i) => {
         switch (bodyElement.type) {
           case "two_column_with_image":

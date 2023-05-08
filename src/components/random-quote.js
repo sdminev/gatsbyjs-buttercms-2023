@@ -22,16 +22,18 @@ const RandomQuote = () => {
   return (
     <>
       {quote && (
-        <div className="container">
-          <div className="row justify-content-center">
-            <div className="col-lg-6 col-md-10">
-              <div className="section-title text-center">
-                <h2>{quote.quote_text}</h2>
-                <p>{quote.author}</p>
+        <section id="quotes">
+          <div className="container my-5 py-5">
+            <div className="row justify-content-center">
+              <div className="col-lg-6 col-md-10">
+                <div className="section-title text-center">
+                  <h2>{quote.quote_text}</h2>
+                  <p>{quote.author}</p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </section>
       )}
     </>
   );

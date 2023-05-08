@@ -198,7 +198,8 @@ exports.createPages = async ({ graphql, actions }) => {
         context: {
           pageData: page,
           blogPosts: landingPage.data.allButterPost.nodes,
-          menuData: menuItemsData
+          menuData: menuItemsData,
+          projectData
         },
       });
   })
@@ -270,5 +271,20 @@ exports.createPages = async ({ graphql, actions }) => {
       },
     });
   })
+
+
+    // projects
+    projectData.data.butterCollection.value.map(project => {
+      createPage({
+        path: `/projects/${project.name.toLowerCase()}`,
+        component: require.resolve(`./src/templates/project.js`),
+        context: {
+          pageData: project,
+          menuData: menuItemsData,
+        },
+      });
+    })
+  
+  
   
 }

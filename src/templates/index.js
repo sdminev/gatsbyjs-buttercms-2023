@@ -5,6 +5,7 @@ import HeroSection from "../components/HeroSection"
 import TestimonialsSection from "../components/TestimonialsSection"
 import BlogSection from "../components/BlogSection"
 import RandomQuote from "../components/random-quote"
+import ProjectsList from "../components/ProjectsList"
 import TwoColumnWithImageSection from "../components/TwoColumnWithImageSection"
 import SEO from "../components/SEO"
 
@@ -19,7 +20,9 @@ console.log(projects)
       <SEO { ...pageData.seo } />
 
       <HeroSection fields={bodyElements[0].fields} />
-      <div className="quotes"> <RandomQuote /></div>
+       <RandomQuote />
+<ProjectsList projects={projectData.data.butterCollection.value} />
+      
 
       {bodyElements.map((bodyElement, i) => {
         switch (bodyElement.type) {

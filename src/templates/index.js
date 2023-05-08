@@ -20,11 +20,7 @@ console.log(projects)
 
       <HeroSection fields={bodyElements[0].fields} />
       <div className="quotes"> <RandomQuote /></div>
-      {projects.map(project => {
-        return (
-          <div key={project.name}>{ project.name }</div>
-        )
-      })}
+
       {bodyElements.map((bodyElement, i) => {
         switch (bodyElement.type) {
           case "two_column_with_image":
